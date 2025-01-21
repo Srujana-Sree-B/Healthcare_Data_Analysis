@@ -1,0 +1,48 @@
+> healthcare_data <- read.csv("HealthCare_Data.csv")
+> head(healthcare_data)
+                             PatientID             Name Age Gender    Diagnosis
+1 33dea521-91e5-4a9d-86e7-cd45fab08659  Brittany Flores  22   Male          Flu
+2 48841187-ccc8-4bb0-84a6-db8a4fe11c57    Jesse Stevens  59 Female Hypertension
+3 170d6dca-055f-417f-a997-251565a2f1b3    Jerome Nelson  62 Female          Flu
+4 efbf9b56-fbd2-4224-be45-b08812d53401 Jennifer Johnson  66   Male       Asthma
+5 893494b0-8791-4fb4-a17a-1b01e6a94986   Jennifer James  62   Male       Asthma
+6 d4a94e8c-dff8-46ce-95e0-4f2a3b614e9e Franklin Johnson  22   Male          Flu
+  AdmissionDate RecoveryTime..Days. Readmitted
+1    2023-06-09                   9        Yes
+2    2024-08-11                  14        Yes
+3    2023-10-02                   7        Yes
+4    2024-12-15                  23        Yes
+5    2023-02-03                   3         No
+6    2023-03-27                   6         No
+
+
+
+> colnames(healthcare_data)
+[1] "PatientID"           "Name"                "Age"
+[4] "Gender"              "Diagnosis"           "AdmissionDate"
+[7] "RecoveryTime..Days." "Readmitted"
+
+
+> model <- lm(RecoveryTime..Days. ~ Age + Diagnosis, data = healthcare_data)
+> summary(model)
+
+Call:
+lm(formula = RecoveryTime..Days. ~ Age + Diagnosis, data = healthcare_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-15.6086  -7.3140   0.3896   6.9853  15.5550
+
+Coefficients:
+                      Estimate Std. Error t value Pr(>|t|)
+(Intercept)           15.98311    0.98599  16.210   <2e-16 ***
+Age                   -0.02166    0.01644  -1.317    0.188
+DiagnosisDiabetes      1.16101    0.83667   1.388    0.166
+DiagnosisFlu           0.69435    0.85143   0.816    0.415
+DiagnosisHypertension  1.05875    0.85584   1.237    0.216
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.504 on 795 degrees of freedom
+Multiple R-squared:  0.004871,  Adjusted R-squared:  -0.0001358
+F-statistic: 0.9729 on 4 and 795 DF,  p-value: 0.4215
